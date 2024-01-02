@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <ol></ol>
+    <script>
+      let n;
+      let level;
+      let arr;
+      const baseballArr = [];
+      let answer;
+
+      while (true) {
+        level = prompt(
+          "난이도를 결정하세요 HARD(기회 5번) NORMAL(기회 6번) EASY(기회 7번) ex) hard"
+        );
+        if (level == "hard") {
+          n = 6;
+          break;
+        } else if (level == "normal") {
+          n = 7;
+          break;
+        } else if (level == "easy") {
+          n = 8;
+          break;
+        } else alert("잘못입력하였습니다. 제대로 입력해주세요");
+      }
+
+      const myOl = document.querySelector("ol");
+      for (let i = 0; i < n; i++) {
+        const myLi = document.createElement("li");
+        const myInput = document.createElement("input");
+        const btn = document.createElement("button");
+        const btnTxt = document.createTextNode("제출");
+        const myP = document.createElement("p");
+        const pTxt = document.createTextNode("결과");
+        btn.append(btnTxt);
+
+        btn.addEventListener("click", () => {
+          answer = myInput.value;
+          myP.innerText = num(answer);
+        });
+        myP.append(pTxt);
+        myLi.append(myInput, btn, myP);
+        myOl.appendChild(myLi);
+      }
+
+      //맞춰야 될 숫자 만들기
+      function numGenerator() {
+        while (baseballArr.length < 4) {
+          const result = Math.floor(Math.random() * 9);
+
+          if (!baseballArr.includes(result)) {
+            baseballArr.push(result);
+          }
+        }
+        return baseballArr;
+      }
+      numGenerator();
+      console.log(...baseballArr);
+
+      function num(answer) {
+        let a = 0,
+          b = 0;
+        answer.split("");
+        for (let i = 0; i < 4; i++) {
+          if (answer[i] == baseballArr[i]) {
+            a++;
+          } else {
+            if (answer.includes(baseballArr[i])) b++;
+          }
+        }
+        if (a == 0 && b == 0) {
+          return `${answer}는 OUT입니다.`;
+        } else if (a == 4) alert("축하드립니다~ 정답입니다.");
+        else {
+          return `${answer}는 ${a}S ${b}B 입니다.`;
+        }
+      }
+    </script>
+  </body>
+</html>

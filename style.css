@@ -1,0 +1,9 @@
+li{
+    display : flex;
+    margin : 5px;
+    height : 40px;
+}
+
+p{
+    line-height : 8px;
+}
