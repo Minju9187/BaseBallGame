@@ -1,7 +1,9 @@
-import React, { useEffect } from "react";
-import "./HomeStyle.css";
+import React, { useState, useEffect } from "react";
+import GameStartModal from "../../components/Modal/GameStartModal";
 
 export default function Home() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   useEffect(() => {
     const path = document.querySelector("#path");
     const openBtn = document.querySelector(".btn-open");
@@ -19,11 +21,21 @@ export default function Home() {
       // 왼쪽에서 오른쪽으로 그려지도록 dashoffset을 조정합니다.
       path.style.strokeDashoffset = -pathLength * (1 - scrollPercentage);
       openBtn.style.opacity = scrollPercentage;
+
+      if (scrollPercentage > 0.8) {
+        openBtn.disabled = false;
+      } else {
+        openBtn.disabled = true;
+      }
     };
 
     window.addEventListener("scroll", scrollHandler);
     return () => window.removeEventListener("scroll", scrollHandler);
   }, []);
+
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
 
   return (
     <>
@@ -42,10 +54,14 @@ export default function Home() {
         <button
           className="btn-open"
           type="button"
+          onClick={toggleModal}
           title="모달 열기"
-          disabled="게임 시작"
-        ></button>
+          // disabled
+        >
+          게임 시작
+        </button>
       </div>
+      {isModalOpen && <GameStartModal onClose={toggleModal} />}
     </>
   );
 }

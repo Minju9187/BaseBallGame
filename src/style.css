@@ -14,7 +14,7 @@ body {
 path {
   fill: none;
   stroke: white;
-  stroke-width: 5px;
+  stroke-width: 15px;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
@@ -68,6 +68,17 @@ path {
   text-align: center;
 }
 
+.modal h1 {
+  font-size: 24px;
+  margin: 20px 0;
+}
+
+.modal .intro {
+  font-size: 16px;
+  margin: 16px 0;
+  line-height: 25px;
+}
+
 .modal ul {
   list-style: none;
   padding: 0;
@@ -79,10 +90,10 @@ path {
   padding-top: 10px;
 }
 
-.modal ul a {
+.modal ul button {
   display: inline-block;
   background-color: white;
-  text-decoration: none;
+  font-size: 12px;
   padding: 8px 16px 6px;
   border-radius: 40px;
   color: royalblue;
@@ -95,7 +106,7 @@ path {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 100;
-  display: none;
+  /* display: none; */
 }
 /* 검은 배경 */
 .dim {
